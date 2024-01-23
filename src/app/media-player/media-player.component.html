@@ -1,0 +1,39 @@
+<div class="media-player-container">
+  <div class="media-background"></div>
+  <div class="media-player">
+    <img src="../../assets/maroon5.png" alt="album-cover" class="album-cover" />
+    <span class="album-title">Payphone - Maroon V</span>
+    <div class="song-control-container">
+      <i class="fa-solid fa-backward song-btn"></i>
+      <i
+        class="{{ playClass }} song-btn"
+        (click)="onClickPlay(audioPlayer)"
+      ></i>
+      <i class="fa-solid fa-forward song-btn"></i>
+    </div>
+    <div class="play-song-container">
+      <audio #audioPlayer (loadedmetadata)="onMetadataLoaded($event)">
+        <source
+          src="../../assets/songs/maroon5/Payphone.mp3"
+          type="audio/mp3"
+        />
+      </audio>
+      <div
+        #progressBar
+        class="progress-bar-container"
+        (mousedown)="onClickProgressBar($event, progressBar)"
+        (click)="updateProgress($event, progressBar)"
+      >
+        <div [ngStyle]="{ width: percentage }" class="progress-bar"></div>
+      </div>
+      <div class="time-container">
+        <div class="start-time">
+          <span>{{ startTimeMin }}:{{ startTimeSec }}</span>
+        </div>
+        <div class="end-time">
+          <span>{{ endTimeMin }}:{{ endTimeSec }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,10 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MediaPlayerComponent } from './media-player/media-player.component';
+import { HomeComponent } from './home/home.component';
+import { CardViewComponent } from './home/card-view/card-view.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MediaPlayerComponent,
+    HomeComponent,
+    CardViewComponent
   ],
   imports: [
     BrowserModule,

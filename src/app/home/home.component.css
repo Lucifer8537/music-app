@@ -1,0 +1,5 @@
+.home-container {
+  height: 100%;
+  width: 100%;
+  background: radial-gradient(circle at center, gray 0%, black 100%);
+}
