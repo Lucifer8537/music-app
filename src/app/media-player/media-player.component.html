@@ -1,7 +1,16 @@
 <div class="media-player-container">
-  <div class="media-background"></div>
+  <div
+    [style.background-image]="'url(' + albumArt + ')'"
+    class="media-background"
+    [class.brightness]="!isGif"
+  ></div>
   <div class="media-player">
-    <img src="../../assets/maroon5.png" alt="album-cover" class="album-cover" />
+    <img
+      [class.opacity]="isGif"
+      src="../../assets/maroon5.png"
+      alt="album-cover"
+      class="album-cover"
+    />
     <span class="album-title">Payphone - Maroon V</span>
     <div class="song-control-container">
       <i class="fa-solid fa-backward song-btn"></i>

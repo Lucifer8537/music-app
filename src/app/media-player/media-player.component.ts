@@ -18,6 +18,10 @@ export class MediaPlayerComponent {
   startTimeMin = '00';
   endTimeSec = '00';
   endTimeMin = '00';
+  albumImg = '../../assets/maroon5.png';
+  albumGif = '../../assets/songs/maroon5/Fk7l.gif';
+  albumArt!: string;
+  isGif!: boolean;
 
   constructor(private renderer: Renderer2) {}
 
@@ -46,6 +50,13 @@ export class MediaPlayerComponent {
 
   onMetadataLoaded = (event: Event) => {
     const audio = event.target as HTMLAudioElement;
+    if (this.albumGif && this.albumGif.length > 0) {
+      this.albumArt = this.albumGif;
+      this.isGif = true;
+    } else {
+      this.albumArt = this.albumImg;
+      this.isGif = false;
+    }
     this.totalDuration = audio.duration;
     console.log(this.totalDuration);
     const min = Math.floor(this.totalDuration / 60);

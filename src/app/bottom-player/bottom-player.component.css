@@ -1,0 +1,31 @@
+.bottom-player-container {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  width: -webkit-fill-available;
+  color: white;
+  background-color: black;
+  padding: 15px 30px;
+}
+.album {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+.album-cover {
+  width: 60px;
+  height: 75px;
+  border-radius: 5px;
+}
+.song-details {
+  display: grid;
+  gap: 5px;
+}
+.song-name {
+  font-size: 20px;
+  font-weight: 600;
+}
+.singer {
+  font-size: 15px;
+  opacity: 0.7;
+}
