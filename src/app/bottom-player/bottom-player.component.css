@@ -11,6 +11,7 @@
   display: flex;
   align-items: center;
   gap: 25px;
+  margin-right: 37%;
 }
 .album-cover {
   width: 60px;
@@ -28,4 +29,12 @@
 .singer {
   font-size: 15px;
   opacity: 0.7;
+}
+.music-btn {
+  width: 120px;
+  display: flex;
+  justify-content: space-between;
+}
+.music-btn i {
+  cursor: pointer;
 }
