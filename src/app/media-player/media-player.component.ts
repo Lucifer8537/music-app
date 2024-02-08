@@ -1,14 +1,23 @@
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
+import { PlayerService } from '../player-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-media-player',
   templateUrl: './media-player.component.html',
   styleUrls: ['./media-player.component.css'],
 })
-export class MediaPlayerComponent {
+export class MediaPlayerComponent implements OnInit, OnDestroy {
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
   @ViewChild('progressBar') progressBar!: ElementRef;
-  playClass = 'fa-solid fa-play';
+  playClass = 'fa-play';
   currentTime = 0;
   totalDuration = 0;
   intervalId!: number;
@@ -22,18 +31,36 @@ export class MediaPlayerComponent {
   albumGif = '../../assets/songs/maroon5/Fk7l.gif';
   albumArt!: string;
   isGif!: boolean;
+  playBtnControl!: Subscription;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(
+    private renderer: Renderer2,
+    private playerService: PlayerService
+  ) {}
+
+  ngOnInit(): void {
+    this.playBtnControl = this.playerService.playClassSub.subscribe((res) => {
+      if (res === 'fa-pause') {
+        this.audioPlayer.nativeElement.play();
+        this.playClass = res;
+        this.stopUpdatingCurrentTime();
+      } else {
+        this.audioPlayer.nativeElement.pause();
+        this.playClass = res;
+      }
+    });
+  }
 
   onClickPlay = (audio: HTMLAudioElement) => {
-    if (audio.paused) {
-      audio.play();
-      this.playClass = 'fa-solid fa-pause';
-      this.startUpdatingCurrentTime();
-    } else {
-      audio.pause();
-      this.playClass = 'fa-solid fa-play';
-    }
+    // if (audio.paused) {
+    //   audio.play();
+    //   this.playClass = 'fa-solid fa-pause';
+    //   this.startUpdatingCurrentTime();
+    // } else {
+    //   audio.pause();
+    //   this.playClass = 'fa-solid fa-play';
+    // }
+    this.playerService.onPlayOrPause(audio.paused);
   };
 
   startUpdatingCurrentTime = () => {
@@ -127,4 +154,8 @@ export class MediaPlayerComponent {
     if (this.startTimeSec.length === 1)
       this.startTimeSec = '0' + this.startTimeSec;
   };
+
+  ngOnDestroy(): void {
+    this.playBtnControl.unsubscribe();
+  }
 }
